@@ -1,6 +1,13 @@
 FROM opensuse:tumbleweed
 MAINTAINER Markos Chandras <mchandras@suse.de>
 
+# Set good repos
+RUN rm -rf /etc/zypp/repos.d/* && \
+zypper -n -q ar -f -c http://download.opensuse.org/tumbleweed/repo/oss repo-oss && \
+zypper -n -q ar -f -c http://download.opensuse.org/tumbleweed/repo/non-oss repo-non-oss && \
+zypper -n -q ar -f -c http://download.opensuse.org/tumbleweed/repo/debug repo-debug && \
+zypper -n -q ar -f -c http://download.opensuse.org/update/tumbleweed/ repo-update
+
 # Update it
 RUN zypper ref && zypper -n up
 
